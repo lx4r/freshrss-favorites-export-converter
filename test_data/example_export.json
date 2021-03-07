@@ -1,0 +1,34 @@
+{
+  "id": "user/alice/state/org.freshrss/starred",
+  "title": "List of favourite articles",
+  "author": "alice",
+  "items": [
+    {
+      "id": "https://example.com/bobs-blog/1234",
+      "timestampUsec": "1538240704486480",
+      "categories": [
+        "web-security",
+        "javascript"
+      ],
+      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "author": "Bob",
+      "published": 1537895060,
+      "updated": 1537996570,
+      "alternate": [
+        {
+          "href": "https://example.com/bobs-blog/567",
+          "type": "text/html"
+        }
+      ],
+      "content": {
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque enim vitae turpis posuere porta suscipit eget risus. Nullam quis aliquet magna, eu laoreet elit. Cras euismod commodo dolor, sodales finibus sem tincidunt vel. Aenean laoreet aliquam turpis quis pellentesque. Suspendisse potenti. Sed sit amet posuere dui. Maecenas vitae dui condimentum, maximus justo et, vestibulum erat. "
+      },
+      "origin": {
+        "streamId": 42,
+        "title": "Bob's Blog",
+        "htmlUrl": "https://example.com/bobs-blog",
+        "feedUrl": "https://example.com/bobs-blog/feed"
+      }
+    }
+  ]
+}
