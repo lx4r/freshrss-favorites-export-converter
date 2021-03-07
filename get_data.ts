@@ -41,7 +41,7 @@ function isRawFavoriteInfo(input: unknown): input is RawFavoriteInfo {
   const potentialFavoriteInfo = input as RawFavoriteInfo;
   if (
     typeof potentialFavoriteInfo.published === "number" &&
-    potentialFavoriteInfo.title === "string" &&
+    typeof potentialFavoriteInfo.title === "string" &&
     Array.isArray(potentialFavoriteInfo.alternate) &&
     isFavoriteInfoOrigin(potentialFavoriteInfo.origin)
   ) {
