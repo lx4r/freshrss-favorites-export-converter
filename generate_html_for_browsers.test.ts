@@ -1,5 +1,5 @@
 import { assertStrictEquals } from "https://deno.land/std@0.89.0/testing/asserts.ts";
-import { generateHTML } from "./generate_html.ts";
+import { generateHTMLForBrowsers } from "./generate_html_for_browsers.ts";
 import { FavoriteInfo } from "./get_data.ts";
 
 Deno.test(
@@ -8,7 +8,7 @@ Deno.test(
     const expected =
       '\n<html lang="en">\n  <head>\n    <meta charset="utf-8">\n    <title>FreshRSS Favorites Export</title>\n  </head>\n  \n  <body>\n    <h1>FreshRSS Favorites Export</h1>\n    <table>\n      <tr>\n        <th>Date</th>\n        <th>Source</th>\n        <th>Title</th>\n      </tr>\n\n    </table>\n  </body>\n</html>';
 
-    assertStrictEquals(generateHTML([]), expected);
+    assertStrictEquals(generateHTMLForBrowsers([]), expected);
   }
 );
 const VALID_FAVORITE_INFO_1: FavoriteInfo = {
@@ -19,15 +19,18 @@ const VALID_FAVORITE_INFO_1: FavoriteInfo = {
   sourceUrl: "https://example.com/bobs-blog",
 };
 Deno.test(
-  "generateHTML(): generates a valid HTML file when one favorite info is passed",
+  "generateHTMLForBrowsers(): generates a valid HTML file when one favorite info is passed",
   () => {
     const expected = `\n<html lang="en">\n  <head>\n    <meta charset="utf-8">\n    <title>FreshRSS Favorites Export</title>\n  </head>\n  \n  <body>\n    <h1>FreshRSS Favorites Export</h1>\n    <table>\n      <tr>\n        <th>Date</th>\n        <th>Source</th>\n        <th>Title</th>\n      </tr>\n      <tr>\n        <td>2018-09-25</td>\n        <td>\n          <a href="https://example.com/bobs-blog/567">Lorem ipsum</a>\n        </td>\n        <td>\n          <a href="https://example.com/bobs-blog">Bob's Blog</a>\n        </td>\n      </tr>\n    </table>\n  </body>\n</html>`;
 
-    assertStrictEquals(generateHTML([VALID_FAVORITE_INFO_1]), expected);
+    assertStrictEquals(
+      generateHTMLForBrowsers([VALID_FAVORITE_INFO_1]),
+      expected
+    );
   }
 );
 Deno.test(
-  "generateHTML(): generates a valid HTML file when two favorite infos are passed",
+  "generateHTMLForBrowsers(): generates a valid HTML file when two favorite infos are passed",
   () => {
     const VALID_FAVORITE_INFO_2: FavoriteInfo = {
       url: "https://example.com/alices-blog/987",
@@ -39,7 +42,7 @@ Deno.test(
     const expected = `\n<html lang="en">\n  <head>\n    <meta charset="utf-8">\n    <title>FreshRSS Favorites Export</title>\n  </head>\n  \n  <body>\n    <h1>FreshRSS Favorites Export</h1>\n    <table>\n      <tr>\n        <th>Date</th>\n        <th>Source</th>\n        <th>Title</th>\n      </tr>\n      <tr>\n        <td>2018-09-25</td>\n        <td>\n          <a href="https://example.com/bobs-blog/567">Lorem ipsum</a>\n        </td>\n        <td>\n          <a href="https://example.com/bobs-blog">Bob's Blog</a>\n        </td>\n      </tr>\n      <tr>\n        <td>1970-01-01</td>\n        <td>\n          <a href="https://example.com/alices-blog/987">Donec pede justo</a>\n        </td>\n        <td>\n          <a href="https://example.com/alices-blog">Alice's Blog</a>\n        </td>\n      </tr>\n    </table>\n  </body>\n</html>`;
 
     assertStrictEquals(
-      generateHTML([VALID_FAVORITE_INFO_1, VALID_FAVORITE_INFO_2]),
+      generateHTMLForBrowsers([VALID_FAVORITE_INFO_1, VALID_FAVORITE_INFO_2]),
       expected
     );
   }

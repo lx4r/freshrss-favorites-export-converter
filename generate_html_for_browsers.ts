@@ -48,7 +48,7 @@ function generateFullHTML(favoritesTableHTML: string): string {
 </html>`;
 }
 
-export function generateHTML(favoriteInfos: FavoriteInfo[]): string {
+export function generateHTMLForBrowsers(favoriteInfos: FavoriteInfo[]): string {
   return generateFullHTML(
     generateFavoritesTable(generateFavoriteTableRows(favoriteInfos))
   );
