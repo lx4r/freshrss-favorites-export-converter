@@ -1,17 +1,20 @@
 export async function getFavoritesFileContent(
-  filePath: string,
+  fileGetter: (path: string | URL) => Promise<string>,
+  filePath: string
 ): Promise<string> {
-  const fileContent = await Deno.readTextFile(filePath);
+  const fileContent = await fileGetter(filePath);
   if (fileContent === "") {
     throw new Error("empty file");
   }
   return fileContent;
 }
 
-interface RawFavoriteInfo {
-  published: number;
+type RawFavoriteInfoAlternate = { href: string };
+
+export interface RawFavoriteInfo {
+  published: number; // in seconds
   title: string;
-  alternate: { href: string }[];
+  alternate: RawFavoriteInfoAlternate[];
   origin: FavoriteInfoOrigin;
 }
 
@@ -33,16 +36,34 @@ export type FavoriteInfo = {
   url: string;
   title: string;
   sourceName: string;
-  sourceURL: string;
+  sourceUrl: string;
   date: Date;
 };
+
+function isRawFavoriteInfoAlternate(
+  input: unknown
+): input is RawFavoriteInfoAlternate {
+  if (typeof (input as RawFavoriteInfoAlternate).href === "string") {
+    return true;
+  }
+  return false;
+}
+
+function isRawFavoriteInfoAlternateArray(
+  input: unknown
+): input is RawFavoriteInfoAlternate[] {
+  if (!Array.isArray(input)) {
+    return false;
+  }
+  return input.every((elem) => isRawFavoriteInfoAlternate(elem));
+}
 
 function isRawFavoriteInfo(input: unknown): input is RawFavoriteInfo {
   const potentialFavoriteInfo = input as RawFavoriteInfo;
   if (
     typeof potentialFavoriteInfo.published === "number" &&
     typeof potentialFavoriteInfo.title === "string" &&
-    Array.isArray(potentialFavoriteInfo.alternate) &&
+    isRawFavoriteInfoAlternateArray(potentialFavoriteInfo.alternate) &&
     isFavoriteInfoOrigin(potentialFavoriteInfo.origin)
   ) {
     return true;
@@ -58,30 +79,20 @@ function isRawFavoriteInfoArray(input: unknown): input is RawFavoriteInfo[] {
 }
 
 export function filterFavoriteInfo(
-  parsedJSON: Record<string, unknown>,
+  parsedJSON: Record<string, unknown>
 ): FavoriteInfo[] {
   if (!isRawFavoriteInfoArray(parsedJSON.items)) {
     throw new Error(
-      "invalid JSON, e.g. because attributes of favorites are missing",
+      "invalid JSON, e.g. because attributes of favorites are missing"
     );
   }
   return parsedJSON.items.map(
-    ({
-      title,
-      origin,
-      alternate,
-      published,
-    }: {
-      title: string;
-      origin: { title: string; htmlUrl: string };
-      alternate: { href: string }[];
-      published: number; // in seconds
-    }) => ({
+    ({ title, origin, alternate, published: publishedInSeconds }) => ({
       title,
       url: alternate[0].href,
       sourceName: origin.title,
-      sourceURL: origin.htmlUrl,
-      date: new Date(published * 1000),
-    }),
+      sourceUrl: origin.htmlUrl,
+      date: new Date(publishedInSeconds * 1000),
+    })
   );
 }
