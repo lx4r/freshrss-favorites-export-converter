@@ -1,4 +1,4 @@
-export function getFileName(scriptArgs: string[]): string {
+export function getFilePath(scriptArgs: string[]): string {
   if (scriptArgs.length < 1) {
     throw new Error("no JSON file specified");
   }
