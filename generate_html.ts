@@ -5,17 +5,15 @@ function formatFavoriteDate(favoriteDate: Date): string {
 }
 
 function generateFavoriteTableRow(favoriteInfo: FavoriteInfo): string {
-  return `<tr>
-  <td>
-    ${formatFavoriteDate(favoriteInfo.date)}
-  </td>
-  <td>
-    <a href="${favoriteInfo.url}">${favoriteInfo.title}</a>
-  </td>
-  <td>
-    <a href="${favoriteInfo.sourceUrl}">${favoriteInfo.sourceName}</a>
-  </td>
-</tr>`;
+  return `      <tr>
+        <td>${formatFavoriteDate(favoriteInfo.date)}</td>
+        <td>
+          <a href="${favoriteInfo.url}">${favoriteInfo.title}</a>
+        </td>
+        <td>
+          <a href="${favoriteInfo.sourceUrl}">${favoriteInfo.sourceName}</a>
+        </td>
+      </tr>`;
 }
 
 function generateFavoriteTableRows(favoriteInfos: FavoriteInfo[]): string[] {
@@ -26,13 +24,13 @@ function generateFavoriteTableRows(favoriteInfos: FavoriteInfo[]): string[] {
 
 function generateFavoritesTable(tableRows: string[]): string {
   return `<table>
-  <tr>
-    <th>Date</th>
-    <th>Source</th>
-    <th>Title</th>
-  <tr>
-  ${tableRows.join("\n")}
-</table>`;
+      <tr>
+        <th>Date</th>
+        <th>Source</th>
+        <th>Title</th>
+      </tr>
+${tableRows.join("\n")}
+    </table>`;
 }
 
 function generateFullHTML(favoritesTableHTML: string): string {
