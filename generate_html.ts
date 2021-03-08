@@ -1,7 +1,14 @@
 import { FavoriteInfo } from "./get_data.ts";
 
+function formatFavoriteDate(favoriteDate: Date): string {
+  return favoriteDate.toISOString().substring(0, 10);
+}
+
 function generateFavoriteTableRow(favoriteInfo: FavoriteInfo): string {
   return `<tr>
+  <td>
+    ${formatFavoriteDate(favoriteInfo.date)}
+  </td>
   <td>
     <a href="${favoriteInfo.url}">${favoriteInfo.title}</a>
   </td>
@@ -20,6 +27,7 @@ function generateFavoriteTableRows(favoriteInfos: FavoriteInfo[]): string[] {
 function generateFavoritesTable(tableRows: string[]): string {
   return `<table>
   <tr>
+    <th>Date</th>
     <th>Source</th>
     <th>Title</th>
   <tr>
