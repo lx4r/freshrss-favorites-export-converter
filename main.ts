@@ -1,9 +1,9 @@
 import { filterFavoriteInfo, getFavoritesFileContent } from "./get_data.ts";
-import { getFileName } from "./get_file_name.ts";
+import { getFilePath } from "./get_file_path.ts";
 import { generateHTML } from "./generate_html.ts";
 
-const filename = getFileName();
-getFavoritesFileContent(filename)
+const filePath = getFilePath(Deno.args);
+getFavoritesFileContent(Deno.readTextFile, filePath)
   .then((content) => {
     return generateHTML(filterFavoriteInfo(JSON.parse(content)));
   })
@@ -11,5 +11,3 @@ getFavoritesFileContent(filename)
     return Deno.writeTextFile("export.html", html);
   })
   .then((_) => console.log("File successfully written"));
-
-export {};
