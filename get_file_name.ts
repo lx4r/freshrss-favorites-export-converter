@@ -1,11 +1,10 @@
-export function getFileName(): string {
-  const scriptArgs = Deno.args;
+export function getFileName(scriptArgs: string[]): string {
   if (scriptArgs.length < 1) {
     throw new Error("no JSON file specified");
   }
-  const filename = Deno.args[0];
+  const filename = scriptArgs[0];
   if (filename === "") {
-    throw new Error("empty file name specified");
+    throw new Error("empty JSON file specified");
   }
   return filename;
 }
