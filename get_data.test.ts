@@ -10,13 +10,6 @@ import {
   RawFavoriteInfo,
 } from "./get_data.ts";
 
-const VALID_RAW_FAVORITE_INFO: RawFavoriteInfo = {
-  title: "Lorem ipsum",
-  published: 1234,
-  alternate: [{ href: "https://example.com/bobs-blog/567" }],
-  origin: { title: "Lorem ipsum", htmlUrl: "https://example.com/bobs-blog" },
-};
-
 function getMockedFileGetter(
   fileContentToReturn: string
 ): (path: string | URL) => Promise<string> {
@@ -50,6 +43,12 @@ Deno.test("getFavoritesFileContent(): returns file content", async () => {
   assertStrictEquals(actual, fileContent);
 });
 
+const VALID_RAW_FAVORITE_INFO: RawFavoriteInfo = {
+  title: "Lorem ipsum",
+  published: 1234,
+  alternate: [{ href: "https://example.com/bobs-blog/567" }],
+  origin: { title: "Lorem ipsum", htmlUrl: "https://example.com/bobs-blog" },
+};
 Deno.test(
   'filterFavoriteInfo(): rejects invalid parsed JSON (no "items" attribute)',
   () => {
