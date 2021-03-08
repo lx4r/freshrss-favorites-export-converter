@@ -13,7 +13,7 @@ function generateFavoriteTableRow(favoriteInfo: FavoriteInfo): string {
     <a href="${favoriteInfo.url}">${favoriteInfo.title}</a>
   </td>
   <td>
-    <a href="${favoriteInfo.sourceURL}">${favoriteInfo.sourceName}</a>
+    <a href="${favoriteInfo.sourceUrl}">${favoriteInfo.sourceName}</a>
   </td>
 </tr>`;
 }
@@ -52,6 +52,6 @@ function generateFullHTML(favoritesTableHTML: string): string {
 
 export function generateHTML(favoriteInfos: FavoriteInfo[]): string {
   return generateFullHTML(
-    generateFavoritesTable(generateFavoriteTableRows(favoriteInfos)),
+    generateFavoritesTable(generateFavoriteTableRows(favoriteInfos))
   );
 }
