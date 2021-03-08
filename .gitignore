@@ -127,3 +127,5 @@ dist
 
 /*.json
 !/test_data/*
+# exported html
+*.html

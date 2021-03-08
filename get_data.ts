@@ -29,13 +29,13 @@ function isFavoriteInfoOrigin(input: unknown): input is FavoriteInfoOrigin {
   );
 }
 
-export interface FavoriteInfo {
+export type FavoriteInfo = {
   url: string;
   title: string;
   sourceName: string;
   sourceURL: string;
   date: Date;
-}
+};
 
 function isRawFavoriteInfo(input: unknown): input is RawFavoriteInfo {
   const potentialFavoriteInfo = input as RawFavoriteInfo;
