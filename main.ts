@@ -1,4 +1,4 @@
-import { getFavoritesFileContent, filterFavoriteInfo } from "./get_data.ts";
+import { filterFavoriteInfo, getFavoritesFileContent } from "./get_data.ts";
 import { getFileName } from "./get_file_name.ts";
 import { generateHTML } from "./generate_html.ts";
 

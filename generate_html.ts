@@ -52,6 +52,6 @@ function generateFullHTML(favoritesTableHTML: string): string {
 
 export function generateHTML(favoriteInfos: FavoriteInfo[]): string {
   return generateFullHTML(
-    generateFavoritesTable(generateFavoriteTableRows(favoriteInfos))
+    generateFavoritesTable(generateFavoriteTableRows(favoriteInfos)),
   );
 }

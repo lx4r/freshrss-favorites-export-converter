@@ -1,5 +1,5 @@
 export async function getFavoritesFileContent(
-  filePath: string
+  filePath: string,
 ): Promise<string> {
   const fileContent = await Deno.readTextFile(filePath);
   if (fileContent === "") {
@@ -58,11 +58,11 @@ function isRawFavoriteInfoArray(input: unknown): input is RawFavoriteInfo[] {
 }
 
 export function filterFavoriteInfo(
-  parsedJSON: Record<string, unknown>
+  parsedJSON: Record<string, unknown>,
 ): FavoriteInfo[] {
   if (!isRawFavoriteInfoArray(parsedJSON.items)) {
     throw new Error(
-      "invalid JSON, e.g. because attributes of favorites are missing"
+      "invalid JSON, e.g. because attributes of favorites are missing",
     );
   }
   return parsedJSON.items.map(
@@ -82,6 +82,6 @@ export function filterFavoriteInfo(
       sourceName: origin.title,
       sourceURL: origin.htmlUrl,
       date: new Date(published * 1000),
-    })
+    }),
   );
 }
