@@ -4,20 +4,29 @@ function dateToSecondsTimestamp(date: Date): number {
   return Math.floor(date.valueOf() / 1000);
 }
 
-function generateFavoriteEntry({ url, date, title }: FavoriteInfo): string {
+function generateFavoriteEntry(
+  { url, date, title }: FavoriteInfo,
+  currentDate: Date
+): string {
   return `            <DT><A HREF="${url}" ADD_DATE="${dateToSecondsTimestamp(
     date
-  )}" LAST_MODIFIED="${dateToSecondsTimestamp(new Date())}">${title}</A>`;
+  )}" LAST_MODIFIED="${dateToSecondsTimestamp(currentDate)}">${title}</A>`;
 }
 
-function generateFavoritesListRows(favoriteInfos: FavoriteInfo[]): string[] {
+function generateFavoritesListRows(
+  favoriteInfos: FavoriteInfo[],
+  currentDate: Date
+): string[] {
   return favoriteInfos.map((favoriteInfo) =>
-    generateFavoriteEntry(favoriteInfo)
+    generateFavoriteEntry(favoriteInfo, currentDate)
   );
 }
 
-function generateFavoritesList(tableRowsHTML: string[]): string {
-  const currentDateTimstampInSeconds = dateToSecondsTimestamp(new Date());
+function generateFavoritesList(
+  tableRowsHTML: string[],
+  currentDate: Date
+): string {
+  const currentDateTimstampInSeconds = dateToSecondsTimestamp(currentDate);
   return `<DL><p>
     <DT><H3 ADD_DATE="${currentDateTimstampInSeconds}" LAST_MODIFIED="${currentDateTimstampInSeconds}" UNFILED_BOOKMARKS_FOLDER="true">Other Bookmarks</H3>
     <DL><p>
@@ -40,8 +49,14 @@ function generateFullHTML(favoritesListHTML: string): string {
 ${favoritesListHTML}`;
 }
 
-export function generateHTMLForImport(favoriteInfos: FavoriteInfo[]): string {
+export function generateHTMLForImport(
+  favoriteInfos: FavoriteInfo[],
+  currentDate: Date = new Date()
+): string {
   return generateFullHTML(
-    generateFavoritesList(generateFavoritesListRows(favoriteInfos))
+    generateFavoritesList(
+      generateFavoritesListRows(favoriteInfos, currentDate),
+      currentDate
+    )
   );
 }
