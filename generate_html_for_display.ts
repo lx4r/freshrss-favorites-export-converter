@@ -34,8 +34,7 @@ ${tableRows.join("\n")}
 }
 
 function generateFullHTML(favoritesTableHTML: string): string {
-  return `
-<html lang="en">
+  return `<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>FreshRSS Favorites Export</title>
@@ -48,7 +47,7 @@ function generateFullHTML(favoritesTableHTML: string): string {
 </html>`;
 }
 
-export function generateHTMLForBrowsers(favoriteInfos: FavoriteInfo[]): string {
+export function generateHTMLForDisplay(favoriteInfos: FavoriteInfo[]): string {
   return generateFullHTML(
     generateFavoritesTable(generateFavoriteTableRows(favoriteInfos))
   );
