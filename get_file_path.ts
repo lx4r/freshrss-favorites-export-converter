@@ -4,7 +4,7 @@ export function getFilePath(scriptArgs: string[]): string {
   }
   const filename = scriptArgs[0];
   if (filename === "") {
-    throw new Error("Empty path to the JSON file specified");
+    throw new Error("Empty path to the JSON file specified.");
   }
   return filename;
 }
