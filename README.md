@@ -1,9 +1,15 @@
 <h1 align="center">FreshRSS Favorites Export Converter</h1>
 <p align="center">
-  <img src="https://github.com/lx4r/freshrss-favorites-export-converter/actions/workflows/tests.yml/badge.svg" alt="test status" />
+  <a href="https://github.com/lx4r/freshrss-favorites-export-converter/actions/workflows/tests.yml">
+    <img src="https://github.com/lx4r/freshrss-favorites-export-converter/actions/workflows/tests.yml/badge.svg" alt="test status" />
+  </a>
 </p>
 
 > A small tool to generate files to view favorites exported from [*FreshRSS*](https://freshrss.org/) and import them into *Firefox* as bookmarks
+
+## Motivation
+
+I decided to shut down my *FreshRSS* instance but wanted to keep my favorites in a human-readable form. Also I wanted to try out *Deno* :).
 
 ## Features
 
@@ -11,7 +17,7 @@ This tool generates two HTML files: One that just contains the exported favorite
 
 ## Requirements
 
-- [Deno](http://deno.land/)
+- [*Deno*](http://deno.land/)
 
 ## Usage
 
